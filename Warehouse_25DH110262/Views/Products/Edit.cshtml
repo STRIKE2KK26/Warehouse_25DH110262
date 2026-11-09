@@ -1,0 +1,35 @@
+﻿@using Warehouse_25DH110262.Models
+@model EditVM
+@{ ViewBag.Title = "Sửa sản phẩm"; }
+
+<h2>Sửa sản phẩm</h2>
+
+@if (Model.Error != null) { <div class="msg-err">@Model.Error</div> }
+@if (Model.Success != null) { <div class="msg-ok">@Model.Success</div> }
+
+@using (Html.BeginForm("Edit", "Products", FormMethod.Post))
+{
+    <input type="hidden" name="id" value="@Model.ProductID" />
+    <div class="form-group">
+        <label>ProductID (không được sửa)</label>
+        <input class="form-control" value="@Model.ProductID" disabled />
+    </div>
+    <div class="form-group">
+        <label>Tên sản phẩm</label>
+        <input class="form-control" name="productName" value="@Model.ProductName" />
+    </div>
+    <div class="form-group">
+        <label>Danh mục</label>
+        <input class="form-control" name="category" value="@Model.Category" />
+    </div>
+    <div class="form-group">
+        <label>Đơn giá</label>
+        <input class="form-control" type="text" name="price" value="@Model.Price" />
+    </div>
+    <div class="form-group">
+        <label>Số lượng tồn (không được sửa)</label>
+        <input class="form-control" value="@Model.Quantity" disabled />
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu</button>
+    @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+}

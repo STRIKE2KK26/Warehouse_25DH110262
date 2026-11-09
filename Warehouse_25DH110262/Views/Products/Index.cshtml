@@ -1,0 +1,6 @@
+﻿@using Warehouse_25DH110262.Models
+@model IEnumerable<Product>
+@{ ViewBag.Title = "Danh sách sản phẩm"; }
+
+<h2>Danh sách sản phẩm</h2>
+@Html.Partial("_ProductTable", Model)

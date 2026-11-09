@@ -1,0 +1,38 @@
+﻿@using Warehouse_25DH110262.Models
+@model FilterVM
+@{ ViewBag.Title = "Lọc & sắp xếp"; }
+
+<h2>Lọc theo khoảng giá và sắp xếp</h2>
+
+@using (Html.BeginForm("Filter", "Products", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        <label>Từ giá</label>
+        <input class="form-control" type="text" name="from" value="@Model.From" />
+    </div>
+    <div class="form-group">
+        <label>Đến giá</label>
+        <input class="form-control" type="text" name="to" value="@Model.To" />
+    </div>
+    <div class="form-group">
+        <label>Danh mục</label>
+        <select class="form-control" name="category">
+            <option value="">-- Tất cả --</option>
+            @foreach (var c in Model.Categories)
+            {
+                <option value="@c" @(Model.Category == c ? "selected" : "")>@c</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Sắp xếp theo giá</label>
+        <select class="form-control" name="sort">
+            <option value="asc" @(Model.Sort == "asc" ? "selected" : "")>Tăng dần</option>
+            <option value="desc" @(Model.Sort == "desc" ? "selected" : "")>Giảm dần</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Lọc</button>
+}
+
+@if (Model.Error != null) { <div class="msg-err">@Model.Error</div> }
+else { @Html.Partial("_ProductTable", Model.Items) }

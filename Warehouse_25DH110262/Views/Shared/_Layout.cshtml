@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Quản lý kho hàng</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        body { padding: 0; margin: 0; }
+        .wh-header { background: #2c3e50; color: #fff; padding: 14px 24px; }
+        .wh-header h3 { margin: 0; font-size: 20px; }
+        .wh-wrap { display: flex; min-height: 70vh; }
+        .wh-menu { width: 230px; background: #ecf0f1; padding: 16px; }
+        .wh-menu ul { list-style: none; padding: 0; margin: 0; }
+        .wh-menu li { margin-bottom: 8px; }
+        .wh-menu a { display: block; padding: 8px 12px; background: #fff; border-radius: 4px; color: #2c3e50; text-decoration: none; }
+        .wh-menu a:hover { background: #3498db; color: #fff; }
+        .wh-main { flex: 1; padding: 20px 28px; }
+        .wh-footer { background: #2c3e50; color: #fff; text-align: center; padding: 12px; }
+        .msg-ok { color: #155724; background: #d4edda; padding: 10px 14px; border-radius: 4px; margin: 12px 0; }
+        .msg-err { color: #721c24; background: #f8d7da; padding: 10px 14px; border-radius: 4px; margin: 12px 0; }
+    </style>
+</head>
+<body>
+    <header class="wh-header">
+        <h3>Họ và tên: Nguyễn Trường Vũ &nbsp;|&nbsp; MSSV: 25DH110262</h3>
+    </header>
+
+    <div class="wh-wrap">
+        <nav class="wh-menu">
+            <ul>
+                <li>@Html.ActionLink("Câu 2: Danh sách / Sửa", "Index", "Products")</li>
+                <li>@Html.ActionLink("Câu 3: Lọc & sắp xếp", "Filter", "Products")</li>
+                <li>@Html.ActionLink("Câu 4a: Tăng giá %", "Increase", "Products")</li>
+                <li>@Html.ActionLink("Câu 4b: Giảm giá %", "Decrease", "Products")</li>
+                <li>@Html.ActionLink("Câu 5: Giảm giá 2 SP", "DiscountTwo", "Products")</li>
+                <li>@Html.ActionLink("Câu 6: Thêm sản phẩm", "Create", "Products")</li>
+                <li>@Html.ActionLink("Câu 7: Thống kê", "Stats", "Products")</li>
+            </ul>
+        </nav>
+        <main class="wh-main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="wh-footer">
+        Ngày sinh: 17/02/2007
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

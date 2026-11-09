@@ -1,0 +1,50 @@
+﻿@using Warehouse_25DH110262.Models
+@model AdjustVM
+@{
+    bool inc = Model.Mode == "Increase";
+    ViewBag.Title = inc ? "Tăng giá" : "Giảm giá";
+}
+
+<h2>@(inc ? "Tăng giá theo tỷ lệ phần trăm" : "Giảm giá theo tỷ lệ phần trăm")</h2>
+
+@if (Model.Message != null)
+{
+    <div class="@(Model.Success ? "msg-ok" : "msg-err")">@Model.Message</div>
+}
+
+@using (Html.BeginForm(Model.Mode, "Products", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Chọn sản phẩm</label>
+        <select class="form-control" name="productId">
+            <option value="">-- Chọn --</option>
+            @foreach (var p in Model.Products)
+            {
+                <option value="@p.ProductID" @(Model.ProductID == p.ProductID ? "selected" : "")>
+                    @p.ProductID - @p.ProductName (@PriceHelper.Money(p.Price))
+                </option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Tỷ lệ @(inc ? "tăng" : "giảm") (%)</label>
+        <input class="form-control" type="text" name="percent" value="@Model.Percent" />
+    </div>
+    <button type="submit" class="btn btn-primary">Áp dụng</button>
+}
+
+@if (Model.Result != null)
+{
+    <h4>Sản phẩm sau khi cập nhật</h4>
+    <table class="table table-bordered">
+        <tr><th>Tên</th><th>Giá mới</th><th>Mức giá</th></tr>
+        <tr>
+            <td>@Model.Result.ProductName</td>
+            <td>@PriceHelper.Money(Model.Result.Price)</td>
+            <td>@PriceHelper.GetLevel(Model.Result.Price)</td>
+        </tr>
+    </table>
+}
+
+<h4>Danh sách hiện tại</h4>
+@Html.Partial("_ProductTable", Model.Products)

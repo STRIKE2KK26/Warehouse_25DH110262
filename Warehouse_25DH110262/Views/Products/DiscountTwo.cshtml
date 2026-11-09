@@ -1,0 +1,49 @@
+﻿@using Warehouse_25DH110262.Models
+@model DiscountTwoVM
+@{ ViewBag.Title = "Giảm giá 2 sản phẩm"; }
+
+<h2>Giảm giá hai sản phẩm trong một giao dịch</h2>
+
+@if (Model.Message != null)
+{
+    <div class="@(Model.Success ? "msg-ok" : "msg-err")">@Model.Message</div>
+}
+
+@using (Html.BeginForm("DiscountTwo", "Products", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Sản phẩm A</h4>
+            <select class="form-control" name="productA">
+                <option value="">-- Chọn --</option>
+                @foreach (var p in Model.Products)
+                {
+                    <option value="@p.ProductID" @(Model.ProductA == p.ProductID ? "selected" : "")>
+                        @p.ProductID - @p.ProductName (@PriceHelper.Money(p.Price))
+                    </option>
+                }
+            </select>
+            <label>Giảm A (%)</label>
+            <input class="form-control" type="text" name="percentA" value="@Model.PercentA" />
+        </div>
+        <div class="col-md-6">
+            <h4>Sản phẩm B</h4>
+            <select class="form-control" name="productB">
+                <option value="">-- Chọn --</option>
+                @foreach (var p in Model.Products)
+                {
+                    <option value="@p.ProductID" @(Model.ProductB == p.ProductID ? "selected" : "")>
+                        @p.ProductID - @p.ProductName (@PriceHelper.Money(p.Price))
+                    </option>
+                }
+            </select>
+            <label>Giảm B (%)</label>
+            <input class="form-control" type="text" name="percentB" value="@Model.PercentB" />
+        </div>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Áp dụng</button>
+}
+
+<h4>Giá hiện tại trong CSDL</h4>
+@Html.Partial("_ProductTable", Model.Products)

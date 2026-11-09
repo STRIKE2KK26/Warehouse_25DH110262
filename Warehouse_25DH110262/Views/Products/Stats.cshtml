@@ -1,0 +1,11 @@
+﻿@using Warehouse_25DH110262.Models
+@model StatsVM
+@{ ViewBag.Title = "Thống kê"; }
+
+<h2>Thống kê giá và giá trị hàng hóa</h2>
+
+<table class="table table-bordered" style="max-width:520px">
+    <tr><th>Tổng số sản phẩm</th><td>@Model.Total</td></tr>
+    <tr><th>Số sản phẩm "Giá cao" (≥ 500.000 đ)</th><td>@Model.HighCount</td></tr>
+    <tr><th>Tổng giá trị tồn kho</th><td>@PriceHelper.Money(Model.TotalValue)</td></tr>
+</table>

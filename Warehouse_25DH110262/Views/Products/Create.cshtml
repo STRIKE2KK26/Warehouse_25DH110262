@@ -1,0 +1,28 @@
+﻿@using Warehouse_25DH110262.Models
+@model CreateVM
+@{ ViewBag.Title = "Thêm sản phẩm"; }
+
+<h2>Thêm sản phẩm mới</h2>
+
+@if (Model.Error != null) { <div class="msg-err">@Model.Error</div> }
+
+@using (Html.BeginForm("Create", "Products", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Tên sản phẩm</label>
+        <input class="form-control" name="productName" value="@Model.ProductName" />
+    </div>
+    <div class="form-group">
+        <label>Danh mục</label>
+        <input class="form-control" name="category" value="@Model.Category" />
+    </div>
+    <div class="form-group">
+        <label>Đơn giá</label>
+        <input class="form-control" type="text" name="price" value="@Model.Price" />
+    </div>
+    <div class="form-group">
+        <label>Số lượng</label>
+        <input class="form-control" type="text" name="quantity" value="@Model.Quantity" />
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm</button>
+}
